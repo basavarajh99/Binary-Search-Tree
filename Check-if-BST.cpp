@@ -2,16 +2,15 @@
 //initial = [INT_MIN, INT_MAX]
 //TC: O(N) and SC: O(1)
 
-bool isBST(Node* root, int low, int high)
+ bool isBST(TreeNode* root, long high, long low)
 {
-  if(!root) return false;
-  
-  if(root->val <= low or root->val>=high) return false;
-  
-  return isBST(root->left, low, root->val) and isBST(root->right, root->val, high);
+    if(!root) return true;
+
+    if(root->val <= low or root->val >= high) return false;
+
+    return isBST(root->left, root->val, low) and isBST(root->right, high, root->val);
 }
 
-bool isvalid(Node* root)
-{
-  return isBST(root, INT_MIN, INT_MAX);
+bool isValidBST(TreeNode* root) {
+    return isBST(root, (1LL<<31), -(1LL<<31)-1);
 }
